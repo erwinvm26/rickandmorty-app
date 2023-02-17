@@ -3,7 +3,7 @@ import { router } from "./routes";
 
 import config from "./config";
 
-import "./middleware/auth.middleware";
+import "./module/Auth/auth.middleware";
 
 import { AppDataSource } from "../ormconfig";
 

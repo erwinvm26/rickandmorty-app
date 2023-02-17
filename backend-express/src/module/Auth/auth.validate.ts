@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 // Validated the request
-export const LoginValidated = z.object({
+export const loginValidated = z.object({
   body: z
     .object({
       email: z
@@ -13,4 +13,17 @@ export const LoginValidated = z.object({
     .partial()
 });
 
-export type LoginPostInput = z.TypeOf<typeof LoginValidated>["body"];
+export const verifyUser = z.object({
+  body: z
+    .object({
+      email: z
+        .string()
+        .min(1, { message: "This field has to be filled." })
+        .email("This is not a valid email.")
+    })
+    .partial()
+});
+
+export type LoginPostInput = z.TypeOf<typeof loginValidated>["body"];
+
+export type LoginEmailPostInput = z.infer<typeof verifyUser>["body"];

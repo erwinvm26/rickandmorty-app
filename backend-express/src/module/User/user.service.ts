@@ -1,41 +1,33 @@
 import { User } from "./entities/user.entity";
-import { userCreate } from "./interface/user.interface";
+import { UserCreate } from "./interface/user.interface";
 
 import { AppDataSource } from "../../../ormconfig";
 
 export class UserService {
   constructor() {}
 
-  firstOne(id: string) {
-    try {
-      const user = User.findOne({
-        where: {
-          id: +id
-        },
-        select: ["email", "password"]
-      });
+  async firstOne(email: string) {
+    const user = await AppDataSource.getRepository(User).findOne({
+      where: {
+        email
+      },
+      select: ["email", "password"]
+    });
 
-      console.log(user);
-    } catch (error) {
-      console.log(error);
-      throw new Error();
-    }
+    console.log(user);
+
+    // return user;
   }
-  async create({ name, email, password }: userCreate) {
-    // console.log({ name, email, password });
 
-    try {
-      const user = await AppDataSource.getRepository(User).create({
+  async create({ name, email, password }: UserCreate): Promise<User> {
+    const user = await AppDataSource.getRepository(User)
+      .create({
         name,
         email,
         password
-      });
+      })
+      .save();
 
-      const results = await AppDataSource.getRepository(User).save(user);
-
-      // return results;
-    } catch (error) {
-      console.log(error);
-    }
+    return user;
   }
 }
