@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ts-node src/index.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js"
+    "start": "node dist/index.js",
+    "migration:generate": "pnpm build && npx typeorm migration:generate src/database/migrations/Schema -d=./dist/ormconfig.js",
+    "migration:revert": "npx typeorm migration:revert -d dist/ormconfig",
+    "migration:run": "npx typeorm migration:run -d=./dist/ormconfig.js",
+    "migration:show": "npx typeorm migration:show -d=./dist/ormconfig.js"
   },
   "keywords": [],
   "author": "Erwin Vargas",
@@ -31,6 +35,9 @@
     "passport": "^0.6.0",
     "passport-jwt": "^4.0.1",
     "passport-local": "^1.0.0",
+    "pg": "^8.9.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.3.12",
     "zod": "^3.20.6"
   }
 }

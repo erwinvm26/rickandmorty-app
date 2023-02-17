@@ -4,11 +4,24 @@ import jwt from "jsonwebtoken";
 import { BadRequest } from "http-errors";
 import { LoginValidated, LoginPostInput } from "./auth.validate";
 
+import { z } from "zod";
+
 const router = Router();
 
 router.post(
-  "/signup",
-  passport.authenticate("signup", { session: false }),
+  "/register",
+  (req: Request<{}, {}, LoginPostInput>, res: Response, next: NextFunction) => {
+    try {
+      if (LoginValidated.parse(req)) {
+        next();
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.log(error.issues);
+      }
+    }
+  },
+  passport.authenticate("register", { session: false }),
   async (req: Request, res: Response, next: NextFunction) => {
     res.json({
       message: "Signup successful",
@@ -20,8 +33,14 @@ router.post(
 router.post(
   "/login",
   (req: Request<{}, {}, LoginPostInput>, res: Response, next: NextFunction) => {
-    if (LoginValidated.parse(req)) {
-      next();
+    try {
+      if (LoginValidated.parse(req)) {
+        next();
+      }
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        console.log(error.issues);
+      }
     }
   },
   async (req: Request, res: Response, next: NextFunction) => {

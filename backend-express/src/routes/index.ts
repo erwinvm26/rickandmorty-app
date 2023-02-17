@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { IDinamycImports } from "./routes.interface";
 
+import authController from "../module/Auth/auth.controller";
+
 /**
  * Created a new class for the Routes Dinamycs
  */
@@ -17,7 +19,7 @@ class Routes {
   async routerControllers(): Promise<IDinamycImports[]> {
     return [
       {
-        modules: await (await import("../module/Auth/auth.controller")).default
+        modules: authController
       }
     ];
   }

@@ -5,6 +5,16 @@ import config from "./config";
 
 import "./middleware/auth.middleware";
 
+import { AppDataSource } from "../ormconfig";
+
+AppDataSource.initialize()
+  .then(() => {
+    console.log("Data Source has been initialized!");
+  })
+  .catch((err) => {
+    console.error("Error during Data Source initialization", err);
+  });
+
 class App {
   app: Express;
   port: number;
