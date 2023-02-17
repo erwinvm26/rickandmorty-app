@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn, BaseEntity } from "typeorm";
+import {
+  Column,
+  Entity,
+  PrimaryGeneratedColumn,
+  BaseEntity,
+  OneToMany
+} from "typeorm";
+import { Fav } from "../../ApiRM/entities/fav.entity";
 
 @Entity()
 export class User extends BaseEntity {
@@ -16,6 +23,9 @@ export class User extends BaseEntity {
 
   @Column("boolean", { default: true })
   state: boolean;
+
+  @OneToMany((type) => Fav, (fav) => fav.user)
+  fav: Fav[];
 
   @Column("timestamp", { name: "created_at", default: () => "NOW()" })
   createdAt: Date;

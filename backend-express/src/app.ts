@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import { router } from "./routes";
+import { routesExternal } from "./module/ApiRM/index.routes";
 
 import config from "./config";
 
@@ -34,6 +35,7 @@ class App {
 
   private routes() {
     this.app.use("/api", router);
+    this.app.use("/rickmorty", routesExternal);
   }
 }
 
