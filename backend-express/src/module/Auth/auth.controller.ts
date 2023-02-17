@@ -1,36 +1,46 @@
 import { Request, Response, NextFunction, Router } from "express";
-import { z } from "zod";
-import { NotFound } from "http-errors";
+import passport from "passport";
+import jwt from "jsonwebtoken";
+import { BadRequest } from "http-errors";
+import { LoginValidated, LoginPostInput } from "./auth.validate";
 
 const router = Router();
 
-const loginValidated = z.object({
-  body: z
-    .object({
-      email: z
-        .string()
-        .min(1, { message: "This field has to be filled." })
-        .email("This is not a valid email."),
-      password: z.string()
-    })
-    .partial()
-});
-
-type LoginPostInput = z.TypeOf<typeof loginValidated>["body"];
+router.post(
+  "/signup",
+  passport.authenticate("signup", { session: false }),
+  async (req: Request, res: Response, next: NextFunction) => {
+    res.json({
+      message: "Signup successful",
+      user: req.user
+    });
+  }
+);
 
 router.post(
   "/login",
   (req: Request<{}, {}, LoginPostInput>, res: Response, next: NextFunction) => {
-    const { email, password } = req.body;
-
-    if (!email || !password) {
-      throw new NotFound("email and password is required");
+    if (LoginValidated.parse(req)) {
+      next();
     }
-
-    next();
   },
-  (req: Request<{}, {}, LoginPostInput>, res: Response, next: NextFunction) => {
-    console.log("login");
+  async (req: Request, res: Response, next: NextFunction) => {
+    passport.authenticate("login", async (err: any, user: any, info: any) => {
+      try {
+        if (err || !user) throw new BadRequest();
+
+        req.login(user, { session: false }, async (error) => {
+          if (error) return next(error);
+
+          const body = { _id: user._id, email: user.email };
+          const token = jwt.sign({ user: body }, "TOP_SECRET");
+
+          return res.json({ token });
+        });
+      } catch (error) {
+        return next(error);
+      }
+    })(req, res, next);
   }
 );
 

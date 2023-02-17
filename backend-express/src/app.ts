@@ -3,6 +3,8 @@ import { router } from "./routes";
 
 import config from "./config";
 
+import "./middleware/auth.middleware";
+
 class App {
   app: Express;
   port: number;
