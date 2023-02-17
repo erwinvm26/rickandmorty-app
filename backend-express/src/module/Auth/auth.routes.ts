@@ -29,12 +29,11 @@ router.post(
       next();
     } catch (error) {
       if (error instanceof z.ZodError) {
-        // console.log(error.issues);
-
         throw new Error(error.issues[0].message);
       }
     }
   },
+  passport.authenticate("login", { session: false }),
   login
 );
 

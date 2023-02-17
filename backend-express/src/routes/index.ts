@@ -24,6 +24,7 @@ class Routes {
     ];
   }
 
+  // Add all routes to the routes dictionary
   async main() {
     for (let route of await this.routerControllers()) {
       this.router.use(route.path || "/", route.modules);
