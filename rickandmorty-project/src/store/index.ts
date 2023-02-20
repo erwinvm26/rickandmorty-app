@@ -38,4 +38,7 @@ export const store = createStore({
       state.data = save;
     },
   },
+  getters: {
+    getData: (state) => state.data
+  }
 });
