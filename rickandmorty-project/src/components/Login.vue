@@ -45,11 +45,7 @@ export default {
       }
     });
 
-    const navigate = () => {
-      router.push("/");
-    };
-
-    return { email, password, submit, isError, errorMessage, navigate };
+    return { email, password, submit, isError, errorMessage };
   },
 };
 </script>
@@ -58,7 +54,6 @@ export default {
   <div class="d-flex justify-center">
     <v-card width="400" class="text-center" style="padding: 15px">
       <h1 class="text-center">Log in</h1>
-      <button @click="navigate">Navigate</button>
 
       <v-form @submit.prevent="submit">
         <div>

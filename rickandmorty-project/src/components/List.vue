@@ -5,6 +5,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import CardRickMorty from "./Card.vue";
 import { key } from "../store";
+import router from "../router";
 
 const store = useStore(key);
 
@@ -32,13 +33,22 @@ const dataStore = computed(() => {
   return store.state.data
 })
 
+const fnLogout = () => {
+  localStorage.removeItem('user_token');
+  router.push('/login')
+  window.location.href = '/login'
+}
+
 
 // return store.state.data
 </script>
 <template>
   <div>
     <v-container fluid class="bg-surface-variant">
-      <h1 class="text-center mb-5">Rick and Morty</h1>
+      <div class="d-flex justify-space-between">
+        <h1 class="text-center mb-5">Rick and Morty</h1>
+        <v-btn color="secondary" @click="fnLogout">Logout</v-btn>
+      </div>
       <div></div>
       <v-row no-gutters v-for="(item, index) in dataStore" :key="index">
         <v-col class="pa-2" v-for="b in item" :key="`b_${b.id}`">

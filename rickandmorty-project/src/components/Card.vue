@@ -25,7 +25,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
@@ -43,16 +43,6 @@ interface Items {
 
 const props = defineProps<{item: Items}>();
 const show = ref<boolean>(false)
-
-// const items = reactive<Items>({
-//   id: props.item.id,
-//   name: props.item.name,
-//   image: props.item.image,
-//   status: `${props.item.status} - ${props.item.species}`,
-//   lastknownLocation: props.item.location.name,
-//   firstSeenIn: "",
-//   fav: props.item.fav
-// });
 
 const changeFavorites = async (value: boolean, items: Items) => {
   
