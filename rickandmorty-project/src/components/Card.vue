@@ -76,10 +76,7 @@ export default {
         },
       });
 
-      store.dispatch("addListApi", response.data);
-
-      console.log(':: ',response.data);
-      
+      store.dispatch("addListApi", response.data);      
     }
 
     return {

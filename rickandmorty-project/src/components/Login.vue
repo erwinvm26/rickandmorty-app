@@ -6,6 +6,9 @@ import axios from "axios";
 import router from "../router";
 
 export default {
+  mounted() {
+    localStorage.removeItem('user_token');
+  },
   setup() {
     const { handleSubmit, handleReset } = useForm({
       validationSchema: {
@@ -38,6 +41,7 @@ export default {
       } else {
         localStorage.setItem("user_token", response.data.user.token);
         router.push("/");
+        window.location.href = "/"
       }
     });
 
