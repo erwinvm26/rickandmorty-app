@@ -89,12 +89,12 @@ export default {
           </div>
         </div>
       </v-form>
-      <v-alert
-        :v-if="isError"
+      <!-- <v-alert
+        :v-if="errorMessage!=''"
         :text="errorMessage"
         class="mt-3"
         type="error"
-      ></v-alert>
+      ></v-alert> -->
     </v-card>
   </div>
 </template>

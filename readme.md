@@ -26,3 +26,5 @@ pnpm dev
 ```
 
 Note: You can also use ``yarn`` instead of ``pnpm`` if you wish.
+
+``We still do not have the registration section, I would have to create it from the database``
