@@ -8,4 +8,6 @@ const api = new ApiController();
 
 router.get("/", verifyToken, api.getAll);
 
+router.post("/addfav", verifyToken, api.addFav);
+
 export default router;

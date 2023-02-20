@@ -12,6 +12,16 @@ class AuthService {
 
   logout() {}
 
+  id() {
+    const { user } = jwt_decode(this.token) as {
+      user: {
+        op: number
+      };
+    };
+
+    return user.op;
+  }
+
   isTokenExpired(): boolean {
     try {
       const { exp } = jwt_decode(this.token) as {

@@ -13,16 +13,11 @@ import axios from "./axios";
 import router from "./router";
 import { store, key } from "./store";
 
+import "@mdi/font/css/materialdesignicons.css";
+
 const vuetify = createVuetify({
   components,
   directives,
-  icons: {
-    defaultSet: "mdi",
-    aliases,
-    sets: {
-      mdi,
-    },
-  },
 });
 
 const app = createApp(App);

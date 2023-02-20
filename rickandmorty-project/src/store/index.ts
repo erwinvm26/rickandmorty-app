@@ -23,7 +23,7 @@ export const store = createStore({
   },
   mutations: {
     SETADDLISTAPI(state, payload) {
-      const list = payload;
+      const list = payload;      
 
       const save = [];
       var init = 0;

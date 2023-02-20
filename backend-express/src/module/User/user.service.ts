@@ -11,6 +11,7 @@ interface ReturnFunToken {
 }
 
 interface ReturnFunFirstOne {
+  id: number;
   email: string;
   password: string;
   error: false;
@@ -26,13 +27,21 @@ type ReturnFunction = ReturnFunFirstOne | ReturnError;
 export class UserService {
   constructor() {}
 
+  async getUser (id: number): Promise<User | undefined> {
+    const user = await AppDataSource.getRepository(User).findOne({
+      where: { id }
+    })
+
+    return user || undefined
+  }
+
   async firstOne(email: string): Promise<ReturnFunction> {
     const user = await AppDataSource.getRepository(User).findOne({
       where: {
         email
       },
-      select: ["email", "password", "state"]
-    });
+      select: ["email", "password", "state", "id"]
+    });    
 
     if (!user) {
       return {
@@ -42,6 +51,7 @@ export class UserService {
     }
 
     return {
+      id: user.id,
       email: user.email,
       password: user.password,
       error: false

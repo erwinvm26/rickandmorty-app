@@ -54,10 +54,12 @@ passport.use(
         }
 
         if (user && (await compare(password, user.password))) {
+          
           const _user = {
-            email: user.email
+            op: user.id,
+            email: user.email,
           };
-          const token = jwt.sign({ _user }, config.secret_key, {
+          const token = jwt.sign({ user: _user }, config.secret_key, {
             expiresIn: "24h"
           });
 

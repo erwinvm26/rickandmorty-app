@@ -21,6 +21,15 @@ export class Fav extends BaseEntity {
   @ManyToOne((type) => User, (user) => user.fav)
   user: User;
 
+  @Column("varchar", {  nullable: true })
+  details: string;
+
+  @Column('int', { nullable: false, default: 0 })
+  page: number;
+
+  @Column('int', { nullable: false, default: 0 })
+  accessId: number;
+
   @Column("timestamp", { name: "created_at", default: () => "NOW()" })
   createdAt: Date;
 

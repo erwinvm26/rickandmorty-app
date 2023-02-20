@@ -1,7 +1,7 @@
 <script lang="ts">
 import { useStore } from "vuex";
 import axios from "axios";
-
+import jwt_decode from "jwt-decode";
 import CardRickMorty from "./Card.vue";
 import { key, store } from "../store";
 
@@ -12,7 +12,12 @@ export default {
 
   async mounted() {
     const token = localStorage.getItem("user_token");
-    const response = await axios.get("http://localhost:4000/api/rm", {
+    const { user } = jwt_decode(token as string) as {
+        user: {
+          op: number
+        };
+      };
+    const response = await axios.get(`http://localhost:4000/api/rm?numberPage=1&op=${user.op}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
@@ -20,8 +25,8 @@ export default {
     });
 
     if (response.status === 200) {
-      store.dispatch("addListApi", response.data.results);
-      console.log(response.data.results);
+      store.dispatch("addListApi", response.data);
+      console.log(response.data);
     }
   },
 

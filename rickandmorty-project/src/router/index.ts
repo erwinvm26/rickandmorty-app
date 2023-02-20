@@ -11,11 +11,6 @@ const router = createRouter({
       component: Login,
     },
     {
-      path: "/register",
-      name: "register",
-      component: () => import("../components/List.vue"),
-    },
-    {
       path: "/",
       name: "dashboard",
       component: () => import("../components/List.vue"),
@@ -37,8 +32,6 @@ router.beforeEach((to, from, next) => {
   if (authRequired && isAuthenticated) {
     next({ path: "/login" });
   } else if (!isAuthenticated) {
-    console.log(!isAuthenticated);
-
     next();
   } else {
     next();
