@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import axios from "axios";
 
 interface NumberPages {
-  numberPage: number;
+  numberPage?: number;
 }
 
 export class ApiController {
@@ -11,16 +11,17 @@ export class ApiController {
   async getAll(req: Request<{}, {}, {}, NumberPages>, res: Response) {
     const { numberPage = 1 } = req.query;
 
+    console.log({ numberPage });
+
     try {
       const { data, status } = await axios.get(
-        `https://rickandmortyapi.com/api/character/?page=${1}`,
+        `https://rickandmortyapi.com/api/character/?page=${numberPage}`,
         {
           headers: {
             Accept: "application/json"
           }
         }
       );
-
       res.status(status).json(data);
     } catch (error) {
       if (axios.isAxiosError(error)) {

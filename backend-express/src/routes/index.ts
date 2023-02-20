@@ -2,6 +2,7 @@ import { Router } from "express";
 import { IDinamycImports } from "./routes.interface";
 
 import authRoutes from "../module/Auth/auth.routes";
+import rmRoutes from "../module/ApiRM/index.routes";
 
 /**
  * Created a new class for the Routes Dinamycs
@@ -20,6 +21,10 @@ class Routes {
     return [
       {
         modules: authRoutes
+      },
+      {
+        path: "/rm",
+        modules: rmRoutes
       }
     ];
   }

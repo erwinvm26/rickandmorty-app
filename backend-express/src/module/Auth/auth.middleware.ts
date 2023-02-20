@@ -48,18 +48,22 @@ passport.use(
 
         if (user.error) {
           return done(null, {
+            error: true,
             message: user.message
           });
         }
 
         if (user && (await compare(password, user.password))) {
-          const token = jwt.sign({ user }, config.secret_key, {
+          const _user = {
+            email: user.email
+          };
+          const token = jwt.sign({ _user }, config.secret_key, {
             expiresIn: "24h"
           });
 
           return done(
             null,
-            { user: { token } },
+            { error: false, token },
             { message: "Logged Successfully" }
           );
         }
@@ -91,16 +95,20 @@ export function authMiddleware(
 
 export function verifyToken(req: Request, res: Response, next: NextFunction) {
   const token =
-    req.body.token || req.query.token || req.headers["autorization"];
+    req.body.token || req.query.token || req.headers["authorization"];
 
   if (!token) {
-    return res.status(403).send("A token is required for authentication");
+    return res.status(403).json({
+      message: "A token is required for authentication"
+    });
   }
   try {
     const decoded = jwt.verify(token, config.secret_key);
     req.user = decoded;
   } catch (err) {
-    return res.status(401).send("Invalid Token");
+    return res.status(401).json({
+      message: "Invalid Token"
+    });
   }
   return next();
 }

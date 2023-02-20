@@ -1,6 +1,6 @@
 import express, { Express } from "express";
+import cors from "cors";
 import { router } from "./routes";
-import { routesExternal } from "./module/ApiRM/index.routes";
 
 import config from "./config";
 
@@ -31,11 +31,11 @@ class App {
   private middleware() {
     this.app.use(express.urlencoded({ extended: false }));
     this.app.use(express.json());
+    this.app.use(cors());
   }
 
   private routes() {
     this.app.use("/api", router);
-    this.app.use("/rickmorty", routesExternal);
   }
 }
 
