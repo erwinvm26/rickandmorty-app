@@ -13,7 +13,7 @@ export default {
     const { handleSubmit, handleReset } = useForm({
       validationSchema: {
         email: yup.string().email(),
-        password: yup.string(),
+        password: yup.string().required(),
       },
     });
 

@@ -9,12 +9,6 @@
     </div>
     <v-card-actions>
       <v-spacer></v-spacer>
-
-      <!-- <v-btn
-        variant="plain"
-        :icon="show ? 'mdi-star' : 'mdi-star-off'"
-        @click="show = !show"
-      ></v-btn> -->
       <v-btn
         :icon="props.item.fav ? 'mdi-heart' : 'mdi-heart-outline'"
         @click="changeFavorites(!props.item.fav, props.item)"
@@ -42,7 +36,6 @@ interface Items {
 };
 
 const props = defineProps<{item: Items}>();
-const show = ref<boolean>(false)
 
 const changeFavorites = async (value: boolean, items: Items) => {
   
