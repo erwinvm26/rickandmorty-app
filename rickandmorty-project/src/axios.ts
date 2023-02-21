@@ -1,31 +1,17 @@
 import axios from "axios";
-import type { App } from "vue";
 
-interface AxiosOptions {
-  baseUrl?: string;
-  token?: string;
-}
+// const axiosInstance = axios.create({
+//   baseUrl: "http://localhost:4000",
+// })
 
-export default {
-  install: (app: App, options: AxiosOptions) => {
-    app.config.globalProperties.$axios = axios.create({
-      baseURL: options.baseUrl,
-      headers: {
-        Authorization: options.token ? `Bearer ${options.token}` : "",
-      },
-    });
-  },
-};
+const axiosInstance = axios.create({
+  baseURL: "http://localhost:4000/",
+})
 
-// const instance = axios.create({
-//   baseURL: options.baseUrl,
-//   headers: {
-//     Authorization: options.token ? `Bearer ${options.token}` : "",
-//   },
-// });
+export default axiosInstance
 
 // export default {
-//   install: function (Vue) {
-//     Object.defineProperty(Vue.prototype, "$axios", { value: instance });
-//   },
-// };
+//   install: (app: App) => {
+//     app.config.globalProperties.$axios = axiosInstance
+//   }
+// }

@@ -26,7 +26,7 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import axios from "axios";
+import axios from "../axios";
 import jwt_decode from "jwt-decode";
 
 import { store } from "../store";
@@ -53,7 +53,7 @@ const changeFavorites = async (value: boolean, items: Items) => {
     };
   };
 
-  const response = await axios.post("http://localhost:4000/api/rm/addfav?numberPage=1", {
+  const response = await axios.post("api/rm/addfav?numberPage=1", {
     idCharacter: items.id,
     fav: value,
     details: JSON.stringify(items),

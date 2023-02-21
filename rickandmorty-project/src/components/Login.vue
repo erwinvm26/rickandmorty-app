@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useForm, useField } from "vee-validate";
 import * as yup from "yup";
-import axios from "axios";
+import axios from "../axios";
 import router from "../router";
 
 export default {
@@ -24,7 +24,7 @@ export default {
 
     const submit = handleSubmit(async (values) => {
       const response = await axios.post(
-        "http://localhost:4000/api/login",
+        "api/login",
         {
           email: values.email,
           password: values.password,

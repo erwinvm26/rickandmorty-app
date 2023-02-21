@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import {onMounted, computed} from "vue"
 import { useStore } from "vuex";
-import axios from "axios";
+import axios from "../axios";
 import jwt_decode from "jwt-decode";
 import CardRickMorty from "./Card.vue";
 import { key } from "../store";
@@ -16,7 +16,7 @@ onMounted(async () => {
           op: number
         };
       };
-    const response = await axios.get(`http://localhost:4000/api/rm?numberPage=1&op=${user.op}`, {
+    const response = await axios.get(`api/rm?numberPage=1&op=${user.op}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
