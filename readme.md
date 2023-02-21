@@ -31,4 +31,4 @@ Note: You can also use ``yarn`` instead of ``pnpm`` if you wish.
 ``We still do not have the registration section, I would have to create it from the database``
 
 ### In addition, a point to highlight, in the api you can create the user, the only thing we don't have is the frontend, the endpoint will be: 
-``localhost:4000/api/login``
+``http://localhost:4000/api/register``
