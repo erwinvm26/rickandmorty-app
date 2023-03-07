@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import {onMounted, computed} from "vue"
+import { onMounted, computed } from "vue";
 import { useStore } from "vuex";
 import axios from "../axios";
 import jwt_decode from "jwt-decode";
@@ -11,34 +11,32 @@ const store = useStore(key);
 
 onMounted(async () => {
   const token = localStorage.getItem("user_token");
-    const { user } = jwt_decode(token as string) as {
-        user: {
-          op: number
-        };
-      };
-    const response = await axios.get(`api/rm?numberPage=1&op=${user.op}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: token,
-      },
-    });
+  const { user } = jwt_decode(token as string) as {
+    user: {
+      op: number;
+    };
+  };
+  const response = await axios.get(`api/rm?numberPage=1&op=${user.op}`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token,
+    },
+  });
 
-    if (response.status === 200) {
-      store.dispatch("addListApi", response.data);
-      console.log(response.data);
-    }
+  if (response.status === 200) {
+    store.dispatch("addListApi", response.data);
+    console.log(response.data);
+  }
 });
 
 const dataStore = computed(() => {
-  return store.state.data
-})
+  return store.state.data;
+});
 
 const fnLogout = () => {
-  localStorage.removeItem('user_token');
-  router.push('/login')
-  window.location.href = '/login'
-}
-
+  localStorage.removeItem("user_token");
+  window.location.reload();
+};
 
 // return store.state.data
 </script>
