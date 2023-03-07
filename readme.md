@@ -34,7 +34,7 @@ Note: You can also use ``yarn`` instead of ``pnpm`` if you wish.
 ``http://localhost:4000/api/register``
 
 
-### Last step
+### Migrations
 
 If we still have problems with the database, we can make a migration. In the package.json we have the following commands.
 
