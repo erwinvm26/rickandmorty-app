@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ts-node src/index.ts",
     "build": "npx tsc",
-    "start": "node dist/index.js",
+    "start": "node dist/src/index.js",
     "migration:generate": "pnpm build && npx typeorm migration:generate src/database/migrations/schema -d ./dist/ormconfig",
     "migration:revert": "npx typeorm migration:revert -d dist/ormconfig",
     "migration:run": "pnpm build && pnpm migration:show && npx typeorm migration:run -d dist/ormconfig",
