@@ -32,3 +32,18 @@ Note: You can also use ``yarn`` instead of ``pnpm`` if you wish.
 
 ### In addition, a point to highlight, in the api you can create the user, the only thing we don't have is the frontend, the endpoint will be: 
 ``http://localhost:4000/api/register``
+
+
+### Last step
+
+If we still have problems with the database, we can make a migration. In the package.json we have the following commands.
+
+1. We position ourselves in the Backend.
+2. The migration commands for the database are:
+    ```
+    1. pnpm migration:generate -> Funciona para generar la migracion de la base de datos partiendo de las entidades
+    2. pnpm migration:show -> Podemos mostrar la miracion generada
+    3. pnpm migration:run -> Nos permite migrar a la base de datos
+    4. pnpm migration:revert -> revertimos la migracion
+    ```
+

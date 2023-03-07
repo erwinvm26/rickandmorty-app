@@ -27,12 +27,12 @@ type ReturnFunction = ReturnFunFirstOne | ReturnError;
 export class UserService {
   constructor() {}
 
-  async getUser (id: number): Promise<User | undefined> {
+  async getUser(id: number): Promise<User | undefined> {
     const user = await AppDataSource.getRepository(User).findOne({
       where: { id }
-    })
+    });
 
-    return user || undefined
+    return user || undefined;
   }
 
   async firstOne(email: string): Promise<ReturnFunction> {
@@ -41,7 +41,7 @@ export class UserService {
         email
       },
       select: ["email", "password", "state", "id"]
-    });    
+    });
 
     if (!user) {
       return {
@@ -74,6 +74,7 @@ export class UserService {
     }
 
     const pass = await hash(password, 10);
+
     const user = await AppDataSource.getRepository(User)
       .create({
         name,

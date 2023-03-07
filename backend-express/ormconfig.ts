@@ -8,10 +8,10 @@ export const AppDataSource = new DataSource({
   password: "secret",
   database: "postgres",
   logging: false,
-  synchronize: true,
+  synchronize: false,
   name: "default",
-  entities: ["src/module/**/entities/*.entity{.ts,.js}"],
+  entities: ["dist/src/module/**/entities/*.entity.js"],
   migrationsTableName: "migrations",
-  migrations: ["dist/src/database/migrations/*{.ts,.js}"],
-  subscribers: ["dist/src/subscriber/*{.ts,.js}"]
+  migrations: ["dist/src/database/migrations/*.js"],
+  subscribers: ["dist/src/subscriber/*.js"]
 });

@@ -24,6 +24,7 @@ passport.use(
     },
     async (req: Request<{}, {}, UserCreate>, email, password, done) => {
       const { name } = req.body;
+
       try {
         const user = await new UserService().create({ name, email, password });
 
@@ -54,10 +55,9 @@ passport.use(
         }
 
         if (user && (await compare(password, user.password))) {
-          
           const _user = {
             op: user.id,
-            email: user.email,
+            email: user.email
           };
           const token = jwt.sign({ user: _user }, config.secret_key, {
             expiresIn: "24h"
