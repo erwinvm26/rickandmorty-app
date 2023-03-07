@@ -42,9 +42,9 @@ If we still have problems with the database, we can make a migration. In the pac
     pnpm build
   #### 2. The migration commands for the database are:
     ```
-    1. pnpm migration:generate -> Funciona para generar la migracion de la base de datos partiendo de las entidades
-    2. pnpm migration:show -> Podemos mostrar la miracion generada
-    3. pnpm migration:run -> Nos permite migrar a la base de datos
-    4. pnpm migration:revert -> revertimos la migracion
+    1. pnpm migration:generate -> It works to generate the migration of the database starting from the entities
+    2. pnpm migration:show -> We can show generated migration
+    3. pnpm migration:run -> It allows us to migrate to the database
+    4. pnpm migration:revert -> We revert the migration
     ```
 
