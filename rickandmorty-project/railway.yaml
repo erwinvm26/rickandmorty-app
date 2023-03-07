@@ -1,7 +1,0 @@
-name: my-vite-app
-env:
-  NODE_ENV: production
-build:
-  frontend:
-    command: bash start.sh
-    output_path: public
