@@ -41,10 +41,10 @@ If we still have problems with the database, we can make a migration. In the pac
   #### 1. We position ourselves in the Backend and compile.
     pnpm build
   #### 2. The migration commands for the database are:
-    ```
     1. pnpm migration:generate -> It works to generate the migration of the database starting from the entities
     2. pnpm migration:show -> We can show generated migration
     3. pnpm migration:run -> It allows us to migrate to the database
     4. pnpm migration:revert -> We revert the migration
-    ```
+  #### 3. run the backend
+    pnpm dev
 
