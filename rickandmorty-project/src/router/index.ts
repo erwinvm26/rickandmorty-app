@@ -32,13 +32,23 @@ router.beforeEach((to, from, next) => {
   console.log(isAuthenticated);
   console.log(authRequired);
 
-  if (authRequired && isAuthenticated) {
-    next({ path: "/login" });
-  } else if (!isAuthenticated) {
-    next();
+  if (authRequired) {
+    if (isAuthenticated) {
+      next("login");
+    } else {
+      next();
+    }
   } else {
     next();
   }
+
+  // if (authRequired && isAuthenticated) {
+  //   next({ path: "/login" });
+  // } else if (!isAuthenticated) {
+  //   next();
+  // } else {
+  //   next();
+  // }
 });
 
 export default router;
