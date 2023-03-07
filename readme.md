@@ -38,8 +38,9 @@ Note: You can also use ``yarn`` instead of ``pnpm`` if you wish.
 
 If we still have problems with the database, we can make a migration. In the package.json we have the following commands.
 
-1. We position ourselves in the Backend.
-2. The migration commands for the database are:
+  #### 1. We position ourselves in the Backend and compile.
+    pnpm build
+  #### 2. The migration commands for the database are:
     ```
     1. pnpm migration:generate -> Funciona para generar la migracion de la base de datos partiendo de las entidades
     2. pnpm migration:show -> Podemos mostrar la miracion generada
