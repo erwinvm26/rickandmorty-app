@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 class AuthService {
   private token: string;
   constructor() {
-    this.token = localStorage.getItem("user_token");
+    this.token = localStorage.getItem("user_token") ?? "";
   }
 
   login() {}
@@ -15,7 +15,7 @@ class AuthService {
   id() {
     const { user } = jwt_decode(this.token) as {
       user: {
-        op: number
+        op: number;
       };
     };
 

@@ -13,7 +13,7 @@ export const key: InjectionKey<Store<State>> = Symbol();
 
 export const store = createStore({
   state: {
-    data: [],
+    data: [] as Array<any>,
     listFav: [],
   },
   actions: {
@@ -23,7 +23,7 @@ export const store = createStore({
   },
   mutations: {
     SETADDLISTAPI(state, payload) {
-      const list = payload;      
+      const list = payload;
 
       const save = [];
       var init = 0;
@@ -39,6 +39,6 @@ export const store = createStore({
     },
   },
   getters: {
-    getData: (state) => state.data
-  }
+    getData: (state) => state.data,
+  },
 });

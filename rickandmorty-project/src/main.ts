@@ -22,7 +22,7 @@ const app = createApp(App);
 
 app.use(vuetify);
 app.use(router);
-app.use(Vuex);
+app.use(Vuex as any);
 // pass the injection key
 app.use(store, key);
 
