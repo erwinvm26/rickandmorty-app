@@ -30,44 +30,15 @@ router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/register"];
   const authRequired = !publicPages.includes(to.path);
 
-  console.log(isAuthenticated);
-  console.log(authRequired);
-
-  // if (to.matched.some((route) => route.meta.requiresAuth)) {
-  // if (authRequired && isAuthenticated) {
-  //   if (!isAuthenticated) {
-  //     console.log("entro 1");
-  //     next("/login");
-  //   } else {
-  //     console.log("entro 2");
-  //     next("/login");
-  //   }
-  // } else {
-  //   console.log("entro 3");
-  //   next();
-  // }
-
-  // if (authRequired && isAuthenticated) {
-  //   next({ path: "/login" });
-  // } else if (!isAuthenticated) {
-  //   next();
-  // } else {
-  //   next();
-  // }
-
   if (authRequired && isAuthenticated) {
-    console.log("entro 1");
-    // next({ path: "/login" });
     next("/login");
   }
   // Si el token no ha expidado y la ruta no es la esperada, entonces que redireccione al /
   else if (to.path !== "/" && !isAuthenticated) {
-    console.log("entro 5");
     next("/");
   }
   //
   else {
-    console.log("entro 3");
     next();
   }
 });
